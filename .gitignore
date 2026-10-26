@@ -8,3 +8,6 @@ tsconfig.tsbuildinfo
 !.env.example
 backend/src/data.json
 .DS_Store
+
+.vercel
+.env*

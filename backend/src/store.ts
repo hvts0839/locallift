@@ -1,9 +1,15 @@
 import fs from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomBytes, randomUUID, scryptSync, timingSafeEqual } from "node:crypto";
 import type { Company, Notification, Role, StoredCampaign, User } from "./types";
 
-const FILE = fileURLToPath(new URL("./data.json", import.meta.url));
+// Vercel serverless has a read-only repo and a writable /tmp per instance —
+// data lives there on deploys (ephemeral: re-seeds on cold start; Supabase is the upgrade)
+const FILE = process.env.VERCEL
+  ? join(tmpdir(), "locallift-data.json")
+  : fileURLToPath(new URL("./data.json", import.meta.url));
 
 export function hashPassword(pw: string, salt = randomBytes(8).toString("hex")): string {
   return `${salt}:${scryptSync(pw, salt, 32).toString("hex")}`;

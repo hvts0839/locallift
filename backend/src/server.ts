@@ -573,8 +573,13 @@ app.post("/api/campaigns/generate", async (req, res) => {
   res.json({ source, campaign: generated });
 });
 
-app.listen(PORT, () => {
-  console.log(
-    `LocalLift backend listening on http://localhost:${PORT} (ai: ${Boolean(process.env.OPENAI_API_KEY)})`
-  );
-});
+// serverless entry: backend/api/index.ts re-exports this default
+export default app;
+
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(
+      `LocalLift backend listening on http://localhost:${PORT} (ai: ${Boolean(process.env.OPENAI_API_KEY)})`
+    );
+  });
+}
