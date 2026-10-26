@@ -1,0 +1,10 @@
+node_modules/
+.next/
+out/
+*.log
+tsconfig.tsbuildinfo
+.env
+.env.*
+!.env.example
+backend/src/data.json
+.DS_Store
