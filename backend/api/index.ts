@@ -1,4 +1,4 @@
 // Vercel serverless entry — the Express app handles every request (see vercel.json rewrite)
-import app from "../src/server";
+import app from "../src/server.js";
 
 export default app;

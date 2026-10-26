@@ -1,6 +1,6 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import type { User } from "./types";
-import { getDb } from "./store";
+import { getDb } from "./store.js";
 
 const SECRET = process.env.AUTH_SECRET ?? "locallift-dev-secret";
 

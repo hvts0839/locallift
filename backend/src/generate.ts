@@ -1,5 +1,5 @@
 import type { BusinessProfile, CampaignBrief, GeneratedCampaign, Objective, ScheduleItem, SocialPost } from "./types";
-import { allocateBudget } from "./budget";
+import { allocateBudget } from "./budget.js";
 
 // shortcut: template-based local generation standing in for the AI route; the API
 // route (app/api/campaigns/generate) uses this exact function as its failure fallback,

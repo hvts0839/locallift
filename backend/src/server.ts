@@ -2,11 +2,11 @@ import express from "express";
 import cors from "cors";
 import { z } from "zod";
 import { randomUUID } from "node:crypto";
-import { allocateBudget } from "./budget";
-import { generateCampaign } from "./generate";
-import { getDb, hashPassword, saveDb, verifyPassword } from "./store";
-import { issueToken, userFromRequest } from "./auth";
-import { ROLE_LABEL, ROLE_RANK, type Company, type GeneratedCampaign, type Notification, type Role, type StoredCampaign, type User } from "./types";
+import { allocateBudget } from "./budget.js";
+import { generateCampaign } from "./generate.js";
+import { getDb, hashPassword, saveDb, verifyPassword } from "./store.js";
+import { issueToken, userFromRequest } from "./auth.js";
+import { ROLE_LABEL, ROLE_RANK, type Company, type GeneratedCampaign, type Notification, type Role, type StoredCampaign, type User } from "./types.js";
 
 const PORT = Number(process.env.PORT ?? 4000);
 const PROMPT_VERSION = "v1-structured";

@@ -30,9 +30,11 @@ interface DB {
 
 function seed(): DB {
   const now = new Date().toISOString();
-  const companyId = randomUUID();
-  const mk = (name: string, email: string, role: Role, managerId: string | null): User => ({
-    id: randomUUID(),
+  // fixed ids: on serverless every cold instance re-seeds its own store — identical
+  // ids keep auth tokens valid across instances (random ids would 401 cross-instance)
+  const companyId = "sunrise-cafe";
+  const mk = (id: string, name: string, email: string, role: Role, managerId: string | null): User => ({
+    id,
     companyId,
     name,
     email,
@@ -41,10 +43,10 @@ function seed(): DB {
     managerId,
     createdAt: now,
   });
-  const head = mk("Priya", "priya@sunrise.demo", "head", null);
-  const manager = mk("Arjun", "arjun@sunrise.demo", "manager", head.id);
-  const lead = mk("Meera", "meera@sunrise.demo", "team_lead", manager.id);
-  const intern = mk("Rohit", "rohit@sunrise.demo", "employee", lead.id);
+  const head = mk("sunrise-head", "Priya", "priya@sunrise.demo", "head", null);
+  const manager = mk("sunrise-manager", "Arjun", "arjun@sunrise.demo", "manager", head.id);
+  const lead = mk("sunrise-lead", "Meera", "meera@sunrise.demo", "team_lead", manager.id);
+  const intern = mk("sunrise-intern", "Rohit", "rohit@sunrise.demo", "employee", lead.id);
 
   const db: DB = {
     companies: [{ id: companyId, name: "Sunrise Café", createdAt: now }],
